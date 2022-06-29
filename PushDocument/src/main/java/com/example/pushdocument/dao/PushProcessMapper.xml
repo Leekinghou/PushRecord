@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.pushdocument.dao.PushProcessMapper">
+    <select id="countPushRecordsByState" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select count(1) from push_process where push_state=#{pushState}
+    </select>
+
+    <select id="findPushRecordsByStateLimit" resultType="com.example.pushdocument.entity.PushProcess">
+        select * from push_process where push_state=#{pushState} limit #{start}, #{limit}
+    </select>
+
+    <update id="updateFlagById">
+        update push_process set push_flag=#{pushFlag} where id=#{id}
+    </update>
+
+    <update id="updateAllState">
+        update push_process set push_state=1 where push_state=0
+    </update>
+</mapper>
